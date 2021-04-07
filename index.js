@@ -13,32 +13,32 @@ fetch(
   .then((response) => response.json())
   .then((data) => {
     let barData = data.data;
-    let dummyData = [
-      [0, 300],
-      [0, 400],
-      [0, 500],
-      [0, 600],
-      [0, 700],
-    ];
-    // const xScale = d3
-    //   .scaleLinear()
-    //   .domain([0, d3.max(dummyData, (d) => d[0])])
-    //   .range([padding, width - padding]);
+    // let xScale = d3
+    //   .scaleTime()
+    //   .domain([d3.min(yearsDate), xMax])
+    //   .range([0, width]);
+
+    const barWidth = width / barData.length;
 
     const yScale = d3
       .scaleLinear()
-      .domain([0, d3.max(dummyData, (d) => d[1])])
-      .range([height - padding, padding]);
+      .domain([0, d3.max(barData, (d) => d[1])])
+      .range([0, height - padding]);
 
-    console.log(data);
     svg
       .selectAll("rect")
-      .data(dummyData)
+      .data(barData)
       .enter()
       .append("rect")
-      .attr("x", (d, i) => i * (width / dummyData.length))
-      .attr("y", (d, i) => yScale(d[1]))
-      .attr("width", width / dummyData.length - 1)
+      .attr("x", (d, i) => i * ((width - 100) / barData.length) + padding)
+      .attr("y", (d, i) => height - yScale(d[1]) - padding)
+      .attr("width", barWidth)
       .attr("height", (d) => yScale(d[1]))
-      .attr("color", "blue");
+      .attr("class", "bar")
+      .attr("data-date", (d) => d[0])
+      .attr("data-gdp", (d) => d[1])
+      .append("tooltip")
+      .attr("data-date", (d) => d[0])
+      .attr("id", "tooltip")
+      .text((d) => d[1]);
   });

@@ -10,7 +10,8 @@
 body {
   height: 100vh;
   width: 100vw;
-
+  min-height: 600px;
+  min-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,4 +21,19 @@ body {
 /* Start SVG Elements */
 svg {
   background: pink;
+}
+
+.bar {
+  fill: #33adff;
+}
+.bar:hover {
+  fill: red;
+}
+
+.hidden {
+  display: none;
+}
+/* ToolTip */
+#tooltip {
+  font-weight: bold;
 }

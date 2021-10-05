@@ -20,7 +20,9 @@ body {
 
 /* Start SVG Elements */
 svg {
-  background: pink;
+  background: rgb(230, 230, 230);
+  border: solid black 1px;
+  border-radius: 10px;
 }
 
 .bar {
